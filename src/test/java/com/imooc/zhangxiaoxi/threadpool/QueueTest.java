@@ -56,7 +56,6 @@ public class QueueTest {
         }).start();
 
         // 删除值
-        /*
         new Thread(() -> {
             try {
                 queue.take();
@@ -65,7 +64,6 @@ public class QueueTest {
                 e.printStackTrace();
             }
         }).start();
-        */
 
         Thread.sleep(1000L * 60);
     }

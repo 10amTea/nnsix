@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public class FileService {
 
     /**
-     * 从过url获取本地文件内容，调用函数式接口处理
+     * 通过url获取本地文件内容，调用函数式接口处理
      * @param url
      * @param fileConsumer
      */

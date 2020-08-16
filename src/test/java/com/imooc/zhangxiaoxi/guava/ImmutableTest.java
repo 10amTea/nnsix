@@ -42,7 +42,8 @@ public class ImmutableTest {
          * 构造不可变集合对象三种方式
          */
         // 通过已经存在的集合创建
-        ImmutableSet.copyOf(list);
+        ImmutableSet immutableSetOne = ImmutableSet.copyOf(list);
+        immutableSetOne.remove(0); // 方法废弃
 
         // 通过初始值，直接创建不可变集合
         ImmutableSet immutableSet =

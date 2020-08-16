@@ -34,7 +34,7 @@ public class StreamVs {
         /**
          * 1 打印所有商品
          */
-        for (Sku sku: cartSkuList) {
+        for (Sku sku : cartSkuList) {
             System.out.println(JSON.toJSONString(sku, true));
         }
 
@@ -42,7 +42,7 @@ public class StreamVs {
          * 2 图书类过滤掉
          */
         List<Sku> notBooksSkuList = new ArrayList<Sku>();
-        for (Sku sku: cartSkuList) {
+        for (Sku sku : cartSkuList) {
             if (!SkuCategoryEnum.BOOKS.equals(sku.getSkuCategory())) {
                 notBooksSkuList.add(sku);
             }
@@ -76,7 +76,7 @@ public class StreamVs {
          * 4 求两件商品的总价
          */
         Double money = 0.0;
-        for (Sku sku: top2SkuList) {
+        for (Sku sku : top2SkuList) {
             // money = money + sku.getTotalPrice();
             money += sku.getTotalPrice();
         }
@@ -85,7 +85,7 @@ public class StreamVs {
          * 获取两件商品的名称
          */
         List<String> resultSkuNameList = new ArrayList<String>();
-        for (Sku sku: top2SkuList) {
+        for (Sku sku : top2SkuList) {
             resultSkuNameList.add(sku.getSkuName());
         }
 
@@ -108,41 +108,41 @@ public class StreamVs {
 
         List<String> resultSkuNameList =
                 CartService.getCartSkuList()
-                .stream()
-                /**
-                 * 1 打印商品信息
-                 */
-                .peek(sku -> System.out.println(
-                        JSON.toJSONString(sku, true)))
-                /**
-                 * 2 过滤掉所有图书类商品
-                 */
-                .filter(sku -> !SkuCategoryEnum.BOOKS.equals(
-                        sku.getSkuCategory()))
-                /**
-                 * 排序
-                 */
-                .sorted(Comparator.
-                        comparing(Sku::getTotalPrice).reversed())
-                /**
-                 * TOP2
-                 */
-                .limit(2)
+                        .stream()
+                        /**
+                         * 1 打印商品信息
+                         */
+                        .peek(sku -> System.out.println(
+                                JSON.toJSONString(sku, true)))
+                        /**
+                         * 2 过滤掉所有图书类商品
+                         */
+                        .filter(sku -> !SkuCategoryEnum.BOOKS.equals(
+                                sku.getSkuCategory()))
+                        /**
+                         * 排序
+                         */
+                        .sorted(Comparator.
+                                comparing(Sku::getTotalPrice).reversed())
+                        /**
+                         * TOP2
+                         */
+                        .limit(2)
 
-                /**
-                 * 累加商品总金额
-                 */
-                .peek(sku -> money.set(money.get() + sku.getTotalPrice()))
+                        /**
+                         * 累加商品总金额
+                         */
+                        .peek(sku -> money.set(money.get() + sku.getTotalPrice()))
 
-                /**
-                 * 获取商品名称
-                 */
-                .map(sku -> sku.getSkuName())
+                        /**
+                         * 获取商品名称
+                         */
+                        .map(sku -> sku.getSkuName())
 
-                /**
-                 * 收集结果
-                 */
-                .collect(Collectors.toList());
+                        /**
+                         * 收集结果
+                         */
+                        .collect(Collectors.toList());
 
 
         /**
